@@ -17,8 +17,8 @@ A Docker container that runs Farming Simulator 25 Dedicated Server on Ubuntu 24.
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/ubuntu-fs25-server.git
-cd ubuntu-fs25-server
+git clone https://github.com/wierdview/FS25_dedicated.git
+cd FS25_dedicated
 ```
 
 ### Step 2: Download Farming Simulator 25
