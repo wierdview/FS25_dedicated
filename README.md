@@ -261,7 +261,7 @@ Server must be non-Steam version from GIANTS Software.
 ## Support and Resources
 
 - [GIANTS Software Forum](https://forum.giants-software.com/)
-- [FS25 Dedicated Server Documentation](https://www.farming-simulator.com/support.php)
+- [FS25 Dedicated Server Documentation](https://www.farmsimgame.com/Docs/Farming-Simulator-25/Dedicated-Servers/)
 - [Docker Documentation](https://docs.docker.com/)
 - [Wine Documentation](https://www.winehq.org/documentation)
 
