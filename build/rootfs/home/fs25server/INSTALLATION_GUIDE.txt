@@ -1,0 +1,53 @@
+FARMING SIMULATOR 25 SERVER INSTALLATION GUIDE
+=============================================
+
+PREREQUISITES:
+- FS25 installer file (.exe) mounted at /opt/fs25/installer
+- Valid FS25 serial number (server license)
+- VNC connection established
+
+VNC ACCESS:
+- VNC Port: 5900
+- Web VNC: http://localhost:6080
+- Default Password: Set via VNC_PASSWORD environment variable
+
+INSTALLATION STEPS:
+1. Connect to VNC using your preferred VNC client or web browser
+2. Right-click on desktop to access the Fluxbox menu
+3. Select "Install FS25" from the menu
+4. Follow the installer prompts:
+   - Enter your FS25 serial number when prompted
+   - Use default installation path
+   - Complete the installation process
+
+ACTIVATION STEPS:
+1. After installation, select "Run Game Client" from the menu
+2. Enter your product key when prompted
+3. Complete the activation process
+4. Close the game client after activation
+
+POST-INSTALLATION:
+1. The game will be installed to the Wine directory
+2. Web admin credentials are set via environment variables
+3. Start the server using "Start FS25 Server" from the menu
+4. Check logs in "View Server Logs" if issues occur
+
+DIRECTORY STRUCTURE:
+/opt/fs25/
+├── installer/    # Mount your installer files here
+├── game/         # Game installation directory
+├── config/       # Server configuration files
+├── wine/         # Wine prefix directory
+└── dlc/          # DLC installation files (if any)
+
+TROUBLESHOOTING:
+- If installer doesn't start: Check that .exe file exists in /opt/fs25/installer
+- If Wine errors occur: Try running 'winecfg' from terminal
+- For permission issues: Ensure directories are owned by fs25server user
+- Check supervisor logs: /var/log/supervisor/
+
+USEFUL COMMANDS:
+- Open terminal: Right-click desktop → Terminal
+- Check server status: ps aux | grep dedicatedServer
+- View logs: tail -f /var/log/supervisor/fs25server.log
+- Restart VNC: supervisorctl restart x11vnc

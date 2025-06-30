@@ -1,0 +1,79 @@
+services:
+  ubuntu-fs25-server:
+    build:
+      context: .
+      network: host
+    container_name: ubuntu-fs25-server
+    restart: unless-stopped
+    environment:
+      # VNC Settings
+      - VNC_PASSWORD=${VNC_PASSWORD}
+      - WEB_USERNAME=${WEB_USERNAME}
+      - WEB_PASSWORD=${WEB_PASSWORD}
+      
+      # User/Group IDs
+      - PUID=${PUID}
+      - PGID=${PGID}
+      
+      # Server Configuration
+      - SERVER_NAME=${SERVER_NAME}
+      - SERVER_PASSWORD=${SERVER_PASSWORD}
+      - SERVER_ADMIN=${SERVER_ADMIN}
+      - SERVER_PLAYERS=${SERVER_PLAYERS}
+      - SERVER_PORT=${SERVER_PORT}
+      - SERVER_REGION=${SERVER_REGION}
+      - SERVER_MAP=${SERVER_MAP}
+      - SERVER_DIFFICULTY=${SERVER_DIFFICULTY}
+      - SERVER_PAUSE_EMPTY=${SERVER_PAUSE_EMPTY}
+      - SERVER_SAVE_INTERVAL=${SERVER_SAVE_INTERVAL}
+      - SERVER_STATS_INTERVAL=${SERVER_STATS_INTERVAL}
+      - SERVER_CROSSPLAY=${SERVER_CROSSPLAY}
+      - ENABLE_STARTUP_SCRIPTS=${ENABLE_STARTUP_SCRIPTS}
+      
+    volumes:
+      # System
+      - /etc/localtime:/etc/localtime:ro
+      
+      # FS25 Data
+      - ./config:/opt/fs25/config
+      - ./dlc:/opt/fs25/dlc
+      - ./installer:/opt/fs25/installer
+      
+      # Persistent game data (includes mods, savegames, settings, etc.)
+      - ./userdata:/home/fs25server/Documents/My Games/FarmingSimulator2025
+      
+      # Wine prefix (persistent) - includes activation data
+      - wine_data:/home/fs25server/.wine
+      
+      # Wine registry (stores activation keys)
+      - ./wine_registry:/home/fs25server/.wine/drive_c/users/fs25server
+      
+    ports:
+      # VNC
+      - "5900:5900/tcp"
+      
+      # Web VNC (noVNC)
+      - "6080:6080/tcp"
+      
+      # FS25 Web Admin
+      - "8080:8080/tcp"
+      
+      # FS25 Game Server
+      - "10823:10823/tcp"
+      - "10823:10823/udp"
+      
+    cap_add:
+      - SYS_NICE
+    
+    # Resources limits (adjust based on your system)
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G
+
+volumes:
+  wine_data:
